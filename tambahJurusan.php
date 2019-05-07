@@ -39,7 +39,14 @@
             <form action="" method="post">
                 <div class="container">
                     <div class="collection">
-                        <a href="#!" class="collection-item  red darken-4 white-text">
+                        <a href="#!" class="collection-item  
+                        <?php 
+                        if ($message == "Jurusan berhasil ditambah") {
+                            echo "green darken-4";
+                        } else {
+                            echo "red darken-4";
+                        }
+                        ?>  white-text">
                             <?php 
                             if (isset($message)) {
                                 echo $message;

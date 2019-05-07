@@ -1,7 +1,7 @@
 <?php
     include "function.php";
     if (isset($_POST["action"])) {
-        if ($_POST["jurusan"] != "" && $_POST["nama"] != "") {
+        if (isset($_POST["jurusan"]) && $_POST["nama"] != "") {
             $hasil = executeQuery($mysqli, "SELECT COUNT(id_matakuliah) FROM mata_kuliah"); 
             $jumlah = $hasil[0][0];
             $id_matkul = "MK".str_pad((string)$jumlah, 3, "0", STR_PAD_LEFT);
@@ -36,7 +36,14 @@
             <h1>Tambah Mata Kuliah</h1>
             <div class="container">
                 <div class="collection">
-                    <a href="#!" class="collection-item  red darken-4 white-text">
+                    <a href="#!" class="collection-item 
+                        <?php 
+                        if ($message == "Jurusan berhasil ditambah") {
+                            echo "green darken-4";
+                        } else {
+                            echo "red darken-4";
+                        }
+                        ?> white-text">
                         <?php 
                         if (isset($message)) {
                             echo $message;
