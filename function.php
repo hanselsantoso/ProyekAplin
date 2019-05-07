@@ -54,24 +54,6 @@
         }
     }
 
-    function insertRuangan($mysqli,$namaruangan) {
-        // $cek = executeQuery($mysqli, "select nama_ruangan");
-
-        // if ($namaruangan != $cek[0][0]) {
-        //     # code...
-        // }
-        $hasil = executeQuery($mysqli,"select max(substr(id_ruangan,3,3)) from ruangan");
-        $urutan = (int)$hasil[0][0] + 1;
-        $id = "RU".str_pad((string)$urutan, 3, "0", STR_PAD_LEFT);
-        executeNonQuery($mysqli,"insert into ruangan (id_ruangan,nama_ruangan) values('$id','$namaruangan')");
-        echo "<script>alert('Berhasil Tambah Ruangan')</script>";
-        // $message = "Berhasil Tambah Ruangan";
-    }
-
-    // function loginSiswa($mysqli,$username,$password){
-    //     $hasil = executeQuery($mysqli, "select nrp,password from mahasiswa where nrp = ''")
-    // }
-
     function loginDosen($mysqli,$username,$password){
         $hasil = executeQuery($mysqli, "select id_dosen, password from dosen where id_dosen = '$username'");
 
@@ -137,4 +119,14 @@
             $hari = "Sabtu";
         }
         return $hari;
+
+    function checkJurusan($mysqli,$id){
+        $status = 0;
+        $user = executeQuery($mysqli, "SELECT  * FROM jurusan");
+        foreach ($user as $key => $value) {
+            if ($value["id_jurusan"] == $id) {
+                $status = 1;
+            }
+        }
+        return $status;
     }

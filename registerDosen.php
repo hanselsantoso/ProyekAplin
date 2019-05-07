@@ -12,6 +12,7 @@
                 $iNama = $_REQUEST['nama'];
                 $iPassword = $_REQUEST['password'];
                 executeNonQuery($mysqli,"insert into dosen (nama,password) values('$iNama','$iPassword')");
+                $message = "Berhasil mendaftarkan dosen";
             }    
         }
     ?>
@@ -25,6 +26,14 @@
             <h1>Register Dosen</h1>
             <form action="" method="post">
                 <div class="container">
+                    <div class="collection">
+                        <a href="#!" class="collection-item  red darken-4 white-text">
+                            <?php 
+                            if (isset($message)) {
+                                echo $message;
+                            } ?>
+                        </a>
+                    </div>
                     <div class="input-field">
                     <input id="Nama" type="text" class="validate" name="nama">
                     <label for="Nama">Nama</label>
