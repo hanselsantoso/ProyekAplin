@@ -15,7 +15,9 @@
                 $message = "User tidak ditemukan";
             }
             elseif ($cek == 2) {
+                $_SESSION["idDosen"] = $_POST["nama"];
                 header("location:dosenHome.php");
+
             }
         }
     ?>

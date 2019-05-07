@@ -16,7 +16,7 @@
     <div style="text-align: center"><h1>Home</h1></div>
     <div class="row">
         <div class="container">
-            <div class="col s6">
+            <div class="col s4">
                 <div class="card">
                     <div class="card-image" style="text-align: center">
                         <i class="large material-icons">date_range</i>
@@ -29,7 +29,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col s6">
+            <div class="col s4">
                 <div class="card">
                     <div class="card-image" style="text-align: center">
                         <i class="large material-icons">event_available</i>
@@ -39,6 +39,19 @@
                     </div>
                     <div class="card-action">
                     <a href="mhsLihatKelas.php">Lihat Absen</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s4">
+                <div class="card">
+                    <div class="card-image" style="text-align: center">
+                        <i class="large material-icons">event_available</i>
+                    </div>
+                    <div class="card-content" style="text-align: center">
+                    <h3>Tambah Mahasiswa</h3>
+                    </div>
+                    <div class="card-action">
+                    <a href="tambahMahasiswa.php">Tambah Mahasiswa</a>
                     </div>
                 </div>
             </div>
