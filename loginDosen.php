@@ -18,6 +18,7 @@
                 $_SESSION["idDosen"] = $_POST["nama"];
                 header("location:dosenHome.php");
 
+                $_SESSION['idDosen'] = $_REQUEST['nama'];
             }
         }
     ?>
