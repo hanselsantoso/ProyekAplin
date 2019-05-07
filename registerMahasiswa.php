@@ -9,14 +9,18 @@
         if (isset($_REQUEST['action'])) 
         {
             if ($_REQUEST['action'] == "register") {
-                $iJurusan = $_REQUEST['jurusan'];
-                $hasil = executeQuery($mysqli, "SELECT COUNT(nrp) FROM mahasiswa WHERE nrp like '%$iJurusan%'"); 
-                $jumlah = $hasil[0][0] + 1;
-                $nrp = $iJurusan.str_pad((string)$jumlah, 4, "0", STR_PAD_LEFT);
-                $iNama = $_REQUEST['nama'];
-                $iPassword = $_REQUEST['password'];
-                executeNonQuery($mysqli,"insert into mahasiswa (nrp,id_jurusan,nama,password) values('$nrp','$iJurusan','$iNama','$iPassword')");
-                $message ="Berhasil insert";
+                if (isset($_POST["jurusan"]) && $_REQUEST['nama'] != "" && $_REQUEST['password'] != "") {
+                    $iJurusan = $_REQUEST['jurusan'];
+                    $hasil = executeQuery($mysqli, "SELECT COUNT(nrp) FROM mahasiswa WHERE nrp like '%$iJurusan%'"); 
+                    $jumlah = $hasil[0][0] + 1;
+                    $nrp = $iJurusan.str_pad((string)$jumlah, 4, "0", STR_PAD_LEFT);
+                    $iNama = $_REQUEST['nama'];
+                    $iPassword = $_REQUEST['password'];
+                    executeNonQuery($mysqli,"insert into mahasiswa (nrp,id_jurusan,nama,password) values('$nrp','$iJurusan','$iNama','$iPassword')");
+                    $message ="Berhasil insert";
+                } else {
+                    $message = "Field harus diisi!";
+                }
             }    
         }
     ?>
@@ -40,7 +44,14 @@
             <form action="" method="post">
                 <div class="container">
                     <div class="collection">
-                        <a href="#!" class="collection-item  red darken-4 white-text">
+                        <a href="#!" class="collection-item
+                        <?php 
+                        if ($message == "Berhasil insert") {
+                            echo "green darken-4";
+                        } else {
+                            echo "red darken-4";
+                        }
+                        ?> white-text">
                             <?php 
                             if (isset($message)) {
                                 echo $message;

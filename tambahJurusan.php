@@ -1,15 +1,19 @@
 <?php
     include "function.php";
     if (isset($_REQUEST["action"])) {
-        $cek = checkJurusan($mysqli, $_POST["id"]);
-        if ($cek == 1) {
-            $message = "ID tidak boleh sama";
-        }
-        elseif ($cek == 0) {
-            $id = $_POST["id"];
-            $nama = $_POST["nama"];
-            executeNonQuery($mysqli,"insert into jurusan values('$id','$nama')");
-            $message = "Jurusan berhasil ditambah";
+        if ($_POST["id"] != "" && $_POST["nama"] != "") {
+            $cek = checkJurusan($mysqli, $_POST["id"]);
+            if ($cek == 1) {
+                $message = "ID tidak boleh sama";
+            }
+            elseif ($cek == 0) {
+                $id = $_POST["id"];
+                $nama = $_POST["nama"];
+                executeNonQuery($mysqli,"insert into jurusan values('$id','$nama')");
+                $message = "Jurusan berhasil ditambah";
+            }
+        } else {
+            $message = "Field harus diisi!";
         }
     }
 ?>
@@ -35,7 +39,14 @@
             <form action="" method="post">
                 <div class="container">
                     <div class="collection">
-                        <a href="#!" class="collection-item  red darken-4 white-text">
+                        <a href="#!" class="collection-item  
+                        <?php 
+                        if ($message == "Jurusan berhasil ditambah") {
+                            echo "green darken-4";
+                        } else {
+                            echo "red darken-4";
+                        }
+                        ?>  white-text">
                             <?php 
                             if (isset($message)) {
                                 echo $message;
