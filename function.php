@@ -96,10 +96,34 @@
         }
         return $status;
     }
+    function checkHari($val){
+        if ($val == 1) {
+            $hari = "Minggu";
+        }
+        elseif ($val == 2) {
+            $hari = "Senin";
+        }
+        elseif ($val == 3) {
+            $hari = "Selasa";
+        }
+        elseif ($val == 4) {
+            $hari = "Rabu";
+        }
+        elseif ($val == 5) {
+            $hari = "Kamis";
+        }
+        elseif ($val == 6) {
+            $hari = "Jumat";
+        }
+        elseif ($val == 7) {
+            $hari = "Sabtu";
+        }
+        return $hari;
+    }
 
     function checkJurusan($mysqli,$id){
         $status = 0;
-        $user = executeQuery($mysqli, "SELECT  * FROM jurusan");
+        $user = executeQuery($mysqli, "SELECT * FROM jurusan");
         foreach ($user as $key => $value) {
             if ($value["id_jurusan"] == $id) {
                 $status = 1;

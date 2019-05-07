@@ -9,16 +9,10 @@
         if (isset($_REQUEST['action'])) 
         {
             if ($_REQUEST['action'] == "register") {
-                if ($_REQUEST['nama'] != "" && $_REQUEST['password'] != "") {
-                    
-                    $iNama = $_REQUEST['nama'];
-                    $iPassword = $_REQUEST['password'];
-                    executeNonQuery($mysqli,"insert into dosen (nama,password) values('$iNama','$iPassword')");
-                    $message = "Berhasil mendaftarkan dosen";
-                } else {
-                    $message = "Field harus diisi!";
-                }
-            }
+                $iNama = $_REQUEST['nama'];
+                $iPassword = $_REQUEST['password'];
+                executeNonQuery($mysqli,"insert into dosen (nama,password) values('$iNama','$iPassword')");
+            }    
         }
     ?>
 </head>
@@ -31,21 +25,6 @@
             <h1>Register Dosen</h1>
             <form action="" method="post">
                 <div class="container">
-                    <div class="collection">
-                        <a href="#!" class="collection-item 
-                        <?php 
-                        if ($message == "Berhasil mendaftarkan dosen") {
-                            echo "green darken-4";
-                        } else {
-                            echo "red darken-4";
-                        }
-                        ?> white-text">
-                            <?php 
-                            if (isset($message)) {
-                                echo $message;
-                            } ?>
-                        </a>
-                    </div>
                     <div class="input-field">
                     <input id="Nama" type="text" class="validate" name="nama">
                     <label for="Nama">Nama</label>
