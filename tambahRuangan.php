@@ -1,13 +1,18 @@
 <?php
     include "function.php";
     if (isset($_POST["action"])) {
-        $nama = $_POST["nama"];
-        $kapasitas = $_POST["kapasitas"];
+        if ($_POST["nama"] != "" && $_POST["kapasitas"] != "") {
+            $nama = $_POST["nama"];
+            $kapasitas = $_POST["kapasitas"];
 
-        $hasil = executeQuery($mysqli,"select max(substr(id_ruangan,3,3)) from ruangan");
-        $urutan = (int)$hasil[0][0] + 1;
-        $id = "RU".str_pad((string)$urutan, 3, "0", STR_PAD_LEFT);
-        executeNonQuery($mysqli,"insert into ruangan values('$id','$nama','$kapasitas')");
+            $hasil = executeQuery($mysqli,"select max(substr(id_ruangan,3,3)) from ruangan");
+            $urutan = (int)$hasil[0][0] + 1;
+            $id = "RU".str_pad((string)$urutan, 3, "0", STR_PAD_LEFT);
+            executeNonQuery($mysqli,"insert into ruangan values('$id','$nama','$kapasitas')");
+            $message = "Ruangan berhasil ditambah";
+        } else {
+            $message = "Field harus diisi!";
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -31,7 +36,14 @@
             <h1>Tambah Ruangan</h1>
             <div class="container">
                 <div class="collection">
-                    <a href="#!" class="collection-item  red darken-4 white-text">
+                    <a href="#!" class="collection-item  
+                    <?php 
+                    if ($message == "Ruangan berhasil ditambah") {
+                        echo "green darken-4";
+                    } else {
+                        echo "red darken-4";
+                    }
+                    ?>  white-text">
                         <?php 
                         if (isset($message)) {
                             echo $message;
