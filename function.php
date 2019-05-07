@@ -107,3 +107,27 @@
         }
         return $status;
     }
+
+    function getNamaMhs($mysqli,$nrp)
+    {
+        $temp="";
+        $mhs = executeQuery($mysqli, "SELECT  * FROM mahasiswa");
+        foreach ($mhs as $key => $value) {
+            if ($value["nrp"] == $nrp) {
+                $temp = $value["nama"];
+            }
+        }
+        return $temp;
+    }
+
+    function getNamaDosen($mysqli,$kode)
+    {
+        $temp="";
+        $dosen = executeQuery($mysqli, "SELECT  * FROM dosen");
+        foreach ($dosen as $key => $value) {
+            if ($value["id_dosen"] == $kode) {
+                $temp = $value["nama"];
+            }
+        }
+        return $temp;
+    }

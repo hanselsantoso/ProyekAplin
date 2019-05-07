@@ -1,6 +1,10 @@
 <?php
     include "connection.php";
     include "function.php";
+   // if(isset($_REQUEST["session"]))
+   // {
+      session_destroy();
+    //}
     if (isset($_POST["loginDosen"])) {
       header("location:loginDosen.php");
     }

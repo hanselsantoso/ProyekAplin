@@ -16,6 +16,8 @@
             }
             elseif ($cek == 2) {
                 header("location:mhsHome.php");
+                $_SESSION['idMahasiswa'] = $_REQUEST['nama'];
+                
             }
         }
     ?>
