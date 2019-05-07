@@ -1,13 +1,17 @@
 <?php
     include "function.php";
     if (isset($_POST["action"])) {
-        $hasil = executeQuery($mysqli, "SELECT COUNT(id_matakuliah) FROM mata_kuliah"); 
-        $jumlah = $hasil[0][0];
-        $id_matkul = "MK".str_pad((string)$jumlah, 3, "0", STR_PAD_LEFT);
-        $nama = $_POST["nama"];
-        $jurusan = $_POST["jurusan"];
-        executeNonQuery($mysqli,"insert into mata_kuliah values('$id_matkul','$jurusan','$nama')");
-        $message = "Jurusan berhasil ditambah";
+        if ($_POST["jurusan"] != "" && $_POST["nama"] != "") {
+            $hasil = executeQuery($mysqli, "SELECT COUNT(id_matakuliah) FROM mata_kuliah"); 
+            $jumlah = $hasil[0][0];
+            $id_matkul = "MK".str_pad((string)$jumlah, 3, "0", STR_PAD_LEFT);
+            $nama = $_POST["nama"];
+            $jurusan = $_POST["jurusan"];
+            executeNonQuery($mysqli,"insert into mata_kuliah values('$id_matkul','$jurusan','$nama')");
+            $message = "Jurusan berhasil ditambah";
+        } else {
+            $message = "Field harus diisi!";
+        }
     }
     
 ?>

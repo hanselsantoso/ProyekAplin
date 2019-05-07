@@ -1,7 +1,7 @@
 <?php
     include "function.php";
     if (isset($_POST["action"])) {
-        if (isset($_POST["nama"]) && isset($_POST["kapasitas"])) {
+        if ($_POST["nama"] != "" && $_POST["kapasitas"] != "") {
             $nama = $_POST["nama"];
             $kapasitas = $_POST["kapasitas"];
 
@@ -9,7 +9,7 @@
             $urutan = (int)$hasil[0][0] + 1;
             $id = "RU".str_pad((string)$urutan, 3, "0", STR_PAD_LEFT);
             executeNonQuery($mysqli,"insert into ruangan values('$id','$nama','$kapasitas')");
-            $message = "Berhasil insert";
+            $message = "Ruangan berhasil ditambah";
         } else {
             $message = "Field harus diisi!";
         }

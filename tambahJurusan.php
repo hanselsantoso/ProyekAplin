@@ -1,15 +1,19 @@
 <?php
     include "function.php";
     if (isset($_REQUEST["action"])) {
-        $cek = checkJurusan($mysqli, $_POST["id"]);
-        if ($cek == 1) {
-            $message = "ID tidak boleh sama";
-        }
-        elseif ($cek == 0) {
-            $id = $_POST["id"];
-            $nama = $_POST["nama"];
-            executeNonQuery($mysqli,"insert into jurusan values('$id','$nama')");
-            $message = "Jurusan berhasil ditambah";
+        if ($_POST["id"] != "" && $_POST["nama"] != "") {
+            $cek = checkJurusan($mysqli, $_POST["id"]);
+            if ($cek == 1) {
+                $message = "ID tidak boleh sama";
+            }
+            elseif ($cek == 0) {
+                $id = $_POST["id"];
+                $nama = $_POST["nama"];
+                executeNonQuery($mysqli,"insert into jurusan values('$id','$nama')");
+                $message = "Jurusan berhasil ditambah";
+            }
+        } else {
+            $message = "Field harus diisi!";
         }
     }
 ?>
