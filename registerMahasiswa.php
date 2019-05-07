@@ -10,9 +10,13 @@
         {
             if ($_REQUEST['action'] == "register") {
                 $iJurusan = $_REQUEST['jurusan'];
+                $hasil = executeQuery($mysqli, "SELECT COUNT(nrp) FROM mahasiswa WHERE nrp like '%$iJurusan%'"); 
+                $jumlah = $hasil[0][0] + 1;
+                $nrp = $iJurusan.str_pad((string)$jumlah, 4, "0", STR_PAD_LEFT);
                 $iNama = $_REQUEST['nama'];
                 $iPassword = $_REQUEST['password'];
-                executeNonQuery($mysqli,"insert into mahasiswa (id_jurusan,nama,password) values('$iJurusan','$iNama','$iPassword')");
+                executeNonQuery($mysqli,"insert into mahasiswa (nrp,id_jurusan,nama,password) values('$nrp','$iJurusan','$iNama','$iPassword')");
+                $message ="Berhasil insert";
             }    
         }
     ?>
@@ -35,6 +39,14 @@
             ?>
             <form action="" method="post">
                 <div class="container">
+                    <div class="collection">
+                        <a href="#!" class="collection-item  red darken-4 white-text">
+                            <?php 
+                            if (isset($message)) {
+                                echo $message;
+                            } ?>
+                        </a>
+                    </div>
                     <div class="input-field">
                         <select name="jurusan">
                         <option value="" disabled selected>Pilih Jurusan</option>
@@ -46,10 +58,6 @@
                             </tr>
                             <?php }
                         ?>
-                        
-                        <option value="1">SIB</option>
-                        <option value="2">Informatika</option>
-                        <option value="3">Elektro</option>
                         </select>
                         <label>Pilih Jurusan</label>
                     </div>

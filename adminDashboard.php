@@ -30,10 +30,5 @@
         <div class="collapsible-body"><a href="tambahMataKuliah.php">Tambah Mata Kuliah</a></div>
         <div class="collapsible-body"><a href="lihatMatakuliah.php">Lihat Mata Kuliah</a></div>
         </li>
-        <li>
-        <div class="collapsible-header"><i class="material-icons">access_alarms</i>Jadwal Kuliah</div>
-        <div class="collapsible-body"><a href="tambahJadwalKuliah.php">Tambah Jadwal Kuliah</a></div>
-        <div class="collapsible-body"><a href="lihatJadwal.php">Lihat Jadwal Kuliah</a></div>
-        </li>
     </ul>
 </div>
