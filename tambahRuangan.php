@@ -1,13 +1,18 @@
 <?php
     include "function.php";
     if (isset($_POST["action"])) {
-        $nama = $_POST["nama"];
-        $kapasitas = $_POST["kapasitas"];
+        if (isset($_POST["nama"]) && isset($_POST["kapasitas"])) {
+            $nama = $_POST["nama"];
+            $kapasitas = $_POST["kapasitas"];
 
-        $hasil = executeQuery($mysqli,"select max(substr(id_ruangan,3,3)) from ruangan");
-        $urutan = (int)$hasil[0][0] + 1;
-        $id = "RU".str_pad((string)$urutan, 3, "0", STR_PAD_LEFT);
-        executeNonQuery($mysqli,"insert into ruangan values('$id','$nama','$kapasitas')");
+            $hasil = executeQuery($mysqli,"select max(substr(id_ruangan,3,3)) from ruangan");
+            $urutan = (int)$hasil[0][0] + 1;
+            $id = "RU".str_pad((string)$urutan, 3, "0", STR_PAD_LEFT);
+            executeNonQuery($mysqli,"insert into ruangan values('$id','$nama','$kapasitas')");
+            $message = "Berhasil insert";
+        } else {
+            $message = "Field harus diisi!";
+        }
     }
 ?>
 <!DOCTYPE html>
