@@ -11,7 +11,7 @@
     <script>
         $(document).ready(function(){
             $('select').formSelect();
-            $('.datepicker').datepicker({format : 'dddd, dd-mm-yyyy'});
+            $('.datepicker').datepicker({format : 'dddd, dd mmmm yyyy'});
         });
     </script>
     <div class="row">
@@ -19,19 +19,25 @@
         <div class="col s10">
         <div style="text-align: center">
             <h1>Tambah Kelas</h1>
+            <div class="collection">
+                <a href="#!" class="collection-item  red darken-4 white-text">
+                    <?php 
+                    if (isset($message)) {
+                        echo $message;
+                    } ?>
+                </a>
+            </div>
             <form action="" method="post">
                 <div class="container">
                     <div class="input-field">
                         <select name="matkul">
                             <option value="" disabled selected>Pilih Mata Kuliah</option>
                             <?php
-                            $listIdMK = [];
                             $jurusan = executeQuery($mysqli, "SELECT * FROM mata_kuliah"); 
                                 foreach ($jurusan as $key => $value) {
                                     ?>
                                     <option value="<?php echo $value["id_matakuliah"] ?>"> <?php echo $value["nama_matakuliah"]  ?> </option>
                                     <?php
-                                    $listIdMK[] = $value["id_matakuliah"];
                                 }
                             ?>
                         </select>
@@ -119,10 +125,37 @@
 
         $dtgl = explode(", ", $tgl);
         $djam = explode("-", $jam);
-        var_dump($mk);
-        var_dump($dtgl);
-        var_dump($djam);
-        var_dump($dosen);
+        $prosestanggal = strtotime($dtgl[1]);
+        $tanggal = date('Y-m-d', $prosestanggal);
+        $hari = date('N',$prosestanggal);
+
+        $hitungkelas = executeQuery($mysqli,"select max(substr(id_kelas,3,3)) from kelas");
+        $urutan = (int)$hitungkelas[0][0] + 1;
+        $id = "KE".str_pad((string)$urutan, 3, "0", STR_PAD_LEFT);
+
+        $cek = executeQuery($mysqli, "select id_kelas from kelas where id_ruangan='$ruang' and CONVERT(DATE_FORMAT(mulai_kelas, '%H:%i')='$djam[0]',CHAR) and DAYOFWEEK(hari) = $hari");
+
+        if (!empty($cek)) {
+            // executeNonQuery($mysqli, "insert into kelas values('$id', '$mk', '$dosen', '$ruang', '$djam[0]', '$djam[1]', DATE_FORMAT('$tanggal', '%Y-%m-%d'))");
+            // echo "<script>alert('jadwal kelas $ruang sudah terisi!')</script>";
+            // echo "jadwal kelas $ruang sudah terisi!";
+            var_dump($cek[0][0]);
+        }
+        else {
+            echo "berhasil";
+        }
         var_dump($ruang);
+        var_dump($hari);
+        var_dump($djam[0]);
+        // executeNonQuery($mysqli, "insert into kelas values('$id', '$mk', '$dosen', '$ruang', '$djam[0]', '$djam[1]', DATE_FORMAT('$tanggal', '%Y-%m-%d'))");
+
+        // $message = "Berhasil mendaftarkan kelas!";
+        // var_dump($mk);
+        // var_dump($dtgl[1]);
+        // var_dump($prosestanggal);
+        // var_dump($tanggal);
+        // var_dump($djam);
+        // var_dump($dosen);
+        // var_dump($ruang);
     }
 ?>

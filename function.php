@@ -119,10 +119,11 @@
             $hari = "Sabtu";
         }
         return $hari;
+    }
 
     function checkJurusan($mysqli,$id){
         $status = 0;
-        $user = executeQuery($mysqli, "SELECT  * FROM jurusan");
+        $user = executeQuery($mysqli, "SELECT * FROM jurusan");
         foreach ($user as $key => $value) {
             if ($value["id_jurusan"] == $id) {
                 $status = 1;
