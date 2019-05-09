@@ -1,5 +1,5 @@
 <?php
-    include "mhsNavbar.php";
+    include "dosenNavbar.php";
     include "connection.php";
     include "function.php";
 ?>
@@ -36,7 +36,7 @@
                     <h3>Jadwal Mengajar</h3>
                     </div>
                     <div class="card-action">
-                    <a href="#">Cek</a>
+                    <a href="dosenLihatJadwal.php">Cek</a>
                     </div>
                 </div>
             </div>

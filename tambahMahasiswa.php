@@ -1,5 +1,5 @@
 <?php
-    include "mhsNavbar.php";
+    include "dosenNavbar.php";
     include "connection.php";
     include "function.php";
 
@@ -15,7 +15,18 @@
     <title>Document</title>
 </head>
 <body>
-    <div style="text-align: center"><h1>Home</h1></div>
+    <?php
+         if(isset($_SESSION['idDosen']))
+         {
+             $nama = getNamaDosen($mysqli,$_SESSION['idDosen']);
+         }
+         else
+         {
+             header("location:loginDosen.php");
+         }
+
+    ?>
+    <div style="text-align: center"><h1>Tambah Mahasiswa - <?php echo $nama ?></h1></div>
     <div class="row">
         <div class="container">
             <div class="collection">
