@@ -3,7 +3,12 @@
     include "connection.php";
     include "function.php";
 
-    
+    if (isset($_POST["viewKelas"])) {
+        $_SESSION["idKelas"] = $_POST['viewKelas'];
+        $_SESSION["jurusan"] = $_POST['jurusan'];
+        $_SESSION["namaKelas"] = $_POST["namaKelas"];
+        header("location:doTambahMhs.php");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -15,31 +20,34 @@
     <title>Document</title>
 </head>
 <body>
-    <?php
-         if(isset($_SESSION['idDosen']))
-         {
-             $nama = getNamaDosen($mysqli,$_SESSION['idDosen']);
-         }
-         else
-         {
-             header("location:loginDosen.php");
-         }
-
-    ?>
-    <div style="text-align: center"><h1>Tambah Mahasiswa - <?php echo $nama ?></h1></div>
+    <div style="text-align: center"><h1>List Kelas</h1></div>
     <div class="row">
         <div class="container">
-            <div class="collection">
-            <?php
-                $idDosen = $_SESSION["idDosen"];
-                $kelas = executeQuery($mysqli, "SELECT k.id_kelas as idKelas , mk.nama_matakuliah as namaMk FROM kelas k, mata_kuliah mk WHERE k.id_dosen = '$idDosen' and k.id_matakuliah = mk.id_matakuliah");
-                foreach ($kelas as $key => $value) {
-                    ?>
-                    <button style="width: 100%" type="submit" name="viewKelas" value="<?php echo $value["idKelas"] ?>"><?php echo $value["namaMk"] ?></button>
+            <table>
+                <tr>
+                    <th>Nama Kelas</th>
+                    <th>Action</th>
+                </tr>
+                
                     <?php
-                }
-            ?>
-            </div>
+                        $idDosen = $_SESSION["idDosen"];
+                        $kelas = executeQuery($mysqli, "SELECT k.id_kelas as idKelas , mk.nama_matakuliah as namaMk, mk.id_jurusan as jurusan FROM kelas k, mata_kuliah mk WHERE k.id_dosen = '$idDosen' and k.id_matakuliah = mk.id_matakuliah");
+                        foreach ($kelas as $key => $value) {
+                            ?>
+                            <tr>
+                            <td><?php echo $value["namaMk"] ?></td>
+                            <form action="" method="post">
+                                <td><button class="btn waves-effect waves-light" type="submit" value="<?php echo $value["idKelas"] ?>" name="viewKelas" >Lihat Kelas</button></td>
+                                <input type="hidden" name="jurusan" value="<?php echo $value["jurusan"] ?>"> 
+                                <input type="hidden" name="namaKelas" value="<?php echo $value["namaMk"] ?>"> 
+                            </form>
+                            </tr>
+                            <?php
+                        }
+                    ?>
+            </table>
+            
+            
 
             
         </div>
