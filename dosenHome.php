@@ -49,7 +49,7 @@
                     <h3>Lihat Absen</h3>
                     </div>
                     <div class="card-action">
-                    <a href="mhsLihatKelas.php">Lihat Absen</a>
+                    <a href="dosenLihatKelas.php">Lihat Absen</a>
                     </div>
                 </div>
             </div>

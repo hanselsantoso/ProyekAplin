@@ -9,7 +9,8 @@
             $message = "Mahasiswa sudah masuk kelas ini!";
         }
         else {
-            executeNonQuery($mysqli, "insert into mengambil_kelas values('$_POST[tambahMhs]','$_SESSION[idKelas]')");
+            // var_dump($cek); exit;
+            executeNonQuery($mysqli, "INSERT INTO mengambil_kelas VALUES ('$_POST[tambahMhs]','$_SESSION[idKelas]')");
             $message = "berhasil mendaftarkan siswa";
         }
         
@@ -26,15 +27,23 @@
 </head>
 <body>
     <div style="text-align: center"><h1><?php echo $_SESSION["namaKelas"] ?></h1></div>
-    <a href="#!" class="collection-item  red darken-4 white-text">
-            <?php 
-            if (isset($message)) {
-                echo $message;
-            } ?>
-        </a>
     <div class="row">
         <div class="container">
-        
+            <div class="collection">
+                <a href="#!" class="collection-item 
+                    <?php 
+                    if ($message == "Jurusan berhasil ditambah") {
+                        echo "green darken-4";
+                    } else {
+                        echo "red darken-4";
+                    }
+                    ?> white-text">
+                    <?php 
+                    if (isset($message)) {
+                        echo $message;
+                    } ?>
+                </a>
+            </div>
             <table>
                 <tr>
                     <th>Nama Mahasiswa</th>
@@ -47,7 +56,7 @@
                         <form action="" method="post">
                             <tr>
                                 <td><?php echo($value["nama"]); ?></td>
-                                <td><button class="btn waves-effect waves-light" type="submit" value="<?php echo $value["nrp"] ?>" name="tambahMhs" >Tambah</button></td>
+                                <td><button class="btn waves-effect waves-light" type="submit" value="<?php echo $value["nrp"]; ?>" name="tambahMhs" >Tambah</button></td>
                             </tr>
                         </form>
                         <?php }

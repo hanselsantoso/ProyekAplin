@@ -31,8 +31,8 @@
         <table class="striped">
             <tr>
             <th>Mata Kuliah</th>
-            <th>Jam</th>
             <th>Hari</th>
+            <th>Jam</th>
             </tr>
         
         <?php
