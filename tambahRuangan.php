@@ -35,7 +35,7 @@
         <div style="text-align: center">
             <h1>Tambah Ruangan</h1>
             <div class="container">
-                <div class="collection">
+                <div class="collection" style="display:<?php if (!isset($message)) {echo "none";}?>">
                     <a href="#!" class="collection-item  
                     <?php 
                     if ($message == "Ruangan berhasil ditambah") {

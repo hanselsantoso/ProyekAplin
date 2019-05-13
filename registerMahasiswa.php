@@ -43,7 +43,7 @@
             ?>
             <form action="" method="post">
                 <div class="container">
-                    <div class="collection">
+                    <div class="collection" style="display:<?php if (!isset($message)) {echo "none";}?>">
                         <a href="#!" class="collection-item
                         <?php 
                         if ($message == "Berhasil insert") {

@@ -31,9 +31,9 @@
             <h1>Register Dosen</h1>
             <form action="" method="post">
                 <div class="container">
-                    <div class="collection">
+                    <div class="collection" style="display:<?php if (!isset($message)) {echo "none";}?>">
                         <a href="#!" class="collection-item 
-                        <?php 
+                        <?php
                         if ($message == "Berhasil mendaftarkan dosen") {
                             echo "green darken-4";
                         } else {
