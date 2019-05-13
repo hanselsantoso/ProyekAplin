@@ -26,7 +26,7 @@
         <div class="col s10">
         <div style="text-align: center">
             <h1>Tambah Kelas</h1>
-            <div class="collection">
+            <div class="collection" style="display:<?php if (!isset($message)) {echo "none";}?>">
                 <a href="#!" class="collection-item  red darken-4 white-text">
                     <?php 
                     if (isset($message)) {
