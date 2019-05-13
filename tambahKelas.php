@@ -5,6 +5,13 @@
         include "connection.php";
         include "adminNavbar.php";
         include "function.php";
+
+        if (isset($_POST["matkul"])) {
+            if ($_POST["matkul"] != "") {
+                $jsks =executeQuery($mysqli, "select sks from mata_kuliah where id_matakuliah = '$_POST[matkul]'");
+                $tambahwaktu = $jsks[0][0] * 50;
+            }
+        }
     ?>
 </head>
 <body>
@@ -56,22 +63,16 @@
                             <label>Pilih Hari</label> -->
 
                             <input type="text" class="datepicker" name="tglAwal">
-                            <label for="">Pilih tanggal</label>
+                            <label for="">Pilih Jadwal Mulai</label>
                         </div>
                         <div class="input-field col s6">
                             <select name="jam">
-                            <option value="" disabled selected>2 SKS</option>
-                            <option value="08:00-09:40">08:00-09:40</option>
-                            <option value="10:30-12:10">10:30-12:10</option>
-                            <option value="13:00-14:40">13:00-14:40</option>
-                            <option value="15:30-17:10">15:30-17:10</option>
-                            <option value="" disabled selected>3 SKS</option>
-                            <option value="08:00-10:30">08:00-10:30</option>
-                            <option value="10:30-13:00">10:30-13:00</option>
-                            <option value="13:00-15:30">13:00-15:30</option>
-                            <option value="15:30-18:00">15:30-18:00</option>
+                                <option value="08:00">08:00</option>
+                                <option value="10:30">10:30</option>
+                                <option value="13:00">13:00</option>
+                                <option value="15:30">15:30</option>
                             </select>
-                            <label>Pilih Jadwal Kuliah</label>
+                            <label>Jam Mulai Kuliah</label>
                         </div>
                     </div>
                             
@@ -124,31 +125,38 @@
         $ruang = $_POST["ruang"];
 
         $dtgl = explode(", ", $tgl);
-        $djam = explode("-", $jam);
+        $jamakhir = date('H:i', strtotime($jam. '+'. (string)$tambahwaktu. ' minutes'));
         $prosestanggal = strtotime($dtgl[1]);
         $tanggal = date('Y-m-d', $prosestanggal);
+        $tanggal2 = date('Y-m-d', strtotime($dtgl[1]. '+ 7 days'));
+        $tanggal3 = date('Y-m-d', strtotime($dtgl[1]. '+ 14 days'));
+        $tanggal4 = date('Y-m-d', strtotime($dtgl[1]. '+ 21 days'));
+        $tanggal5 = date('Y-m-d', strtotime($dtgl[1]. '+ 28 days'));
         $hari = date('N',$prosestanggal);
 
         $hitungkelas = executeQuery($mysqli,"select max(substr(id_kelas,3,3)) from kelas");
         $urutan = (int)$hitungkelas[0][0] + 1;
         $id = "KE".str_pad((string)$urutan, 3, "0", STR_PAD_LEFT);
 
-        $cek = executeQuery($mysqli, "select id_kelas from kelas where id_ruangan='$ruang' and CONVERT(DATE_FORMAT(mulai_kelas, '%H:%i')='$djam[0]',CHAR) and DAYOFWEEK(hari) = $hari");
+        // $cek = executeQuery($mysqli, "select id_kelas from kelas where id_ruangan='$ruang' and CONVERT(DATE_FORMAT(mulai_kelas, '%H:%i')='$djam[0]',CHAR) and DAYOFWEEK(hari) = $hari");
 
-        if (!empty($cek)) {
+        // if (!empty($cek)) {
             // executeNonQuery($mysqli, "insert into kelas values('$id', '$mk', '$dosen', '$ruang', '$djam[0]', '$djam[1]', DATE_FORMAT('$tanggal', '%Y-%m-%d'))");
             // echo "<script>alert('jadwal kelas $ruang sudah terisi!')</script>";
             // echo "jadwal kelas $ruang sudah terisi!";
-            var_dump($cek[0][0]);
-        }
-        else {
-            echo "berhasil";
-        }
-        var_dump($ruang);
-        var_dump($hari);
-        var_dump($djam[0]);
-        // executeNonQuery($mysqli, "insert into kelas values('$id', '$mk', '$dosen', '$ruang', '$djam[0]', '$djam[1]', DATE_FORMAT('$tanggal', '%Y-%m-%d'))");
-
+        // }
+        // else {
+        //     echo "berhasil";
+        // }
+        // var_dump($ruang);
+        // var_dump($hari);
+        // var_dump($djam[0]);
+        // var_dump($tanggal);
+        // var_dump($tanggal2);
+        // var_dump($tanggal3);
+        // var_dump($tanggal4);
+        // var_dump($tanggal5);
+        executeNonQuery($mysqli, "insert into kelas values('$id', '$mk', '$dosen', '$ruang', '$jam', '$jamakhir', DATE_FORMAT('$tanggal', '%Y-%m-%d'), DATE_FORMAT('$tanggal2', '%Y-%m-%d'), DATE_FORMAT('$tanggal3', '%Y-%m-%d'), DATE_FORMAT('$tanggal4', '%Y-%m-%d'), DATE_FORMAT('$tanggal5', '%Y-%m-%d'))");
         // $message = "Berhasil mendaftarkan kelas!";
         // var_dump($mk);
         // var_dump($dtgl[1]);

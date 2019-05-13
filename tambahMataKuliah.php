@@ -2,12 +2,13 @@
     include "function.php";
     if (isset($_POST["action"])) {
         if (isset($_POST["jurusan"]) && $_POST["nama"] != "") {
-            $hasil = executeQuery($mysqli, "SELECT COUNT(id_matakuliah) FROM mata_kuliah"); 
-            $jumlah = $hasil[0][0];
+            $hasil = executeQuery($mysqli, "SELECT max(substr(id_matakuliah,3,3)) FROM mata_kuliah"); 
+            $jumlah = (int)$hasil[0][0] + 1;
             $id_matkul = "MK".str_pad((string)$jumlah, 3, "0", STR_PAD_LEFT);
             $nama = $_POST["nama"];
             $jurusan = $_POST["jurusan"];
-            executeNonQuery($mysqli,"insert into mata_kuliah values('$id_matkul','$jurusan','$nama')");
+            $sks = $_POST["sks"];
+            executeNonQuery($mysqli,"insert into mata_kuliah values('$id_matkul','$jurusan','$nama', $sks)");
             $message = "Jurusan berhasil ditambah";
         } else {
             $message = "Field harus diisi!";
@@ -65,10 +66,17 @@
                         </select>
                         <label>Pilih Jurusan</label>
                     </div>
-                    <div class="input-field">
-                    <input id="Nama" name="nama" type="text" class="validate">
-                    <label for="Nama">Nama Mata Kuliah</label>
-                    </div>
+                        <div class="input-field">
+                            <input id="Nama" name="nama" type="text" class="validate">
+                            <label for="Nama">Nama Mata Kuliah</label>
+                        </div>
+                        <div class="input-field">
+                            <select name="sks" id="">
+                                <option value="" disabled selected>Pilih SKS</option>
+                                <option value="2">2 SKS</option>
+                                <option value="3">3 SKS</option>
+                            </select>
+                        </div>
                     <button class="btn waves-effect waves-light" type="submit" name="action">Submit
                         <i class="material-icons right">send</i>
                     </button>
