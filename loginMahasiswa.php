@@ -41,7 +41,7 @@
                     <label for="Nama">Username</label>
                     </div>
                     <div class="input-field">
-                    <input id="password" type="text" class="validate" name="password">
+                    <input id="password" type="password" class="validate" name="password">
                     <label for="Password">Password</label>
                     </div>
                     <button class="btn waves-effect waves-light" type="submit" name="action">Login

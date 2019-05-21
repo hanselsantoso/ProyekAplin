@@ -41,7 +41,7 @@
 				<label for="nrp">NRP</label>
 				<input type="nrp" name="nrp" id="nrp" class="form-control" readonly>
 			</div>
-			<button class="btn btn-success" onclick="checkValid()">Update Data</button>
+			<button class="btn btn-success" onclick="checkValid()">SUBMIT</button>
 			
 		</div>
 	</div>
@@ -66,7 +66,7 @@
 			methods: {
 				onDecode (content) {
 					$("#nrp").val(content);
-					updateFields();
+					// updateFields();
 					animateDataTamu();
 				},
 
@@ -92,37 +92,26 @@
 				}
 			}
 		})
-
-		function updateFields()
+		function checkValid()
 		{
-			$.post("querymh.php",{nrp: $("#nrp").val()}, function(data)
-			{
-				if(data == ';;;')
+			// alert("halo");
+			$.post(
+				"cekMhsAbsen.php",
 				{
-					clearFields();
-					animateScanner();
-					alert("Data Tidak Ditemukan!");	
-				}
-				else
-				{
-					var datauser = data.split(";");
-					if(datauser[4] != '1')
-					{
-						$("#namaTamu").val(datauser[1]);
-						$("#alamat").val(datauser[2]);
-						$("#kuota").val(datauser[3]);
-						$("#jumhadir").attr("max",datauser[3]);
+					nrp: $("#nrp").val()
+				},
+				function(data){
+					if (data == "sukses") {
+						alert("berhasil absen");
+						window.location.href = 'mhsHome.php';
 					}
-					else
-					{
-						clearFields();
+					else{
+						alert("NRP yang anda gunakan salah");
 						animateScanner();
-						alert("Tamu Sudah Datang! Mohon Kontak Admin untuk Mengubah Data Ini!");
+						clearFields();
 					}
-				}
-			});
+				});
 		}
-
 		function clearFields()
 		{
 			$("#nrp").val("");
