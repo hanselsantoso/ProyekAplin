@@ -24,20 +24,28 @@
                         <th>ID kelas</th>
                         <th>Mata Kuliah</th>
                         <th>Jadwal Kuliah</th>
-                        <th>ID dosen</th>
-                        <th>ID ruangan</th>
-                        <th>Hari</th>
+                        <th>Nama dosen</th>
+                        <th>Ruangan</th>
+                        <th style="text-align: center">Pertemuan 1</th>
+                        <th style="text-align: center">Pertemuan 2</th>
+                        <th style="text-align: center">Pertemuan 3</th>
+                        <th style="text-align: center">Pertemuan 4</th>
+                        <th style="text-align: center">Pertemuan 5</th>
                     </tr>
                     <?php $kelas = executeQuery($mysqli, "SELECT k.id_kelas as 'idKelas',mk.nama_matakuliah as'namaMatakuliah',k.mulai_kelas as 'jadwalAwal',k.akhir_kelas as 'jadwalAkhir',d.nama as 'namaDosen',r.nama_ruangan as 'namaRuangan', DAYOFWEEK(k.pertemuan_1) as 'Hari' FROM kelas k,mata_kuliah mk,dosen d,ruangan r WHERE k.id_matakuliah = mk.id_matakuliah and k.id_dosen = d.id_dosen and k.id_ruangan = r.id_ruangan"); 
                         foreach ($kelas as $key => $value) {?>
                         <tr>
+                        <?php $hari = checkHari($value["Hari"]) ?>
                         <td><?php echo($value["idKelas"]); ?></td>
                         <td><?php echo($value["namaMatakuliah"]); ?></td>
-                        <td><?php echo($value["jadwalAwal"]. " - ".$value["jadwalAkhir"] ); ?></td>
+                        <td><?php echo($hari .", ".$value["jadwalAwal"]. " - ".$value["jadwalAkhir"] ); ?></td>
                         <td><?php echo($value["namaDosen"]); ?></td>
                         <td><?php echo($value["namaRuangan"]); ?></td>
-                        <?php $hari = checkHari($value["Hari"]) ?>
-                        <td><?php echo($hari); ?></td>
+                        <td><?php echo($value["pertemuan_1"]); ?></td>
+                        <td><?php echo($value["pertemuan_2"]); ?></td>
+                        <td><?php echo($value["pertemuan_3"]); ?></td>
+                        <td><?php echo($value["pertemuan_4"]); ?></td>
+                        <td><?php echo($value["pertemuan_5"]); ?></td>
                         </tr>
                         <?php }
                     ?>

@@ -155,3 +155,17 @@
         }
         return $temp;
     }
+
+    function getMataKuliah($mysqli,$idKelas){
+        $temp="";
+        $dosen = executeQuery($mysqli, 
+        "SELECT  mk.nama_matakuliah as nama , k.id_kelas as id
+        FROM kelas k, mata_kuliah mk
+        where k.id_matakuliah = mk.id_matakuliah");
+        foreach ($dosen as $key => $value) {
+            if ($value["id"] == $idKelas) {
+                $temp = $value["nama"];
+            }
+        }
+        return $temp;
+    }

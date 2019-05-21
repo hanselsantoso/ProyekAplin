@@ -23,12 +23,14 @@
                     <tr>
                         <th>ID</th>
                         <th>Nama Ruangan</th>
+                        <th>Kapasitas</th>
                     </tr>
                     <?php $ruangan = executeQuery($mysqli, "SELECT  * FROM ruangan"); 
                         foreach ($ruangan as $key => $value) {?>
                         <tr>
                         <td><?php echo($value["id_ruangan"]); ?></td>
                         <td><?php echo($value["nama_ruangan"]); ?></td>
+                        <td><?php echo($value["kapasitas"]); ?></td>
                         </tr>
                         <?php }
                     ?>

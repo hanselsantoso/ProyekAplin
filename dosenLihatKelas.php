@@ -37,7 +37,7 @@
                             <tr>
                             <td><?php echo $value["namaMk"] ?></td>
                             <form action="" method="post">
-                                <td><button class="btn waves-effect waves-light" type="submit" value="<?php echo $value["idKelas"] ?>" name="viewKelas" >Lihat Kelas</button></td>
+                                <td><button class="btn waves-effect waves-light" type="submit" value="<?php echo $value["idKelas"] ?>" name="viewKelas" >Lihat Absen</button></td>
                                 <input type="hidden" name="jurusan" value="<?php echo $value["jurusan"] ?>"> 
                                 <input type="hidden" name="namaKelas" value="<?php echo $value["namaMk"] ?>"> 
                             </form>

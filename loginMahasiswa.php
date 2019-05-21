@@ -27,8 +27,13 @@
         <div style="text-align: center">
             <h1>Login</h1>
             <div class="container">
-                <div class="collection">
-                    <a href="#!" class="collection-item  red darken-4 white-text">
+                <div class="collection" style="display:<?php if (!isset($message)) {echo "none";}?>">
+                    <a href="#!" class="collection-item  
+                    <?php
+                    if ($message == "Password Salah" or $message == "User tidak ditemukan") {
+                        echo "red darken-4";
+                    }
+                    ?> white-text">
                         <?php 
                         if (isset($message)) {
                             echo $message;
@@ -41,7 +46,7 @@
                     <label for="Nama">Username</label>
                     </div>
                     <div class="input-field">
-                    <input id="password" type="text" class="validate" name="password">
+                    <input id="password" type="password" class="validate" name="password">
                     <label for="Password">Password</label>
                     </div>
                     <button class="btn waves-effect waves-light" type="submit" name="action">Login

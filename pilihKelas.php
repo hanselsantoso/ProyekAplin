@@ -9,7 +9,7 @@
 
         if (isset($_POST["viewKelas"])) {
             $_SESSION["idKelas"] = $_POST['viewKelas'];
-            header("location:doMhsLihatKelas.php");
+            header("location:mhsAbsen.php");
         }
     }
  
@@ -36,6 +36,7 @@
             <table border="1">
                     <tr>
                         <th>ID kelas</th>
+                        <th>Mata Kuliah</th>
                         <th>Jadwal Kuliah</th>
                         <th>SKS</th>
                         <th>Dosen</th>
@@ -58,7 +59,7 @@
                         <td><?php echo($value["namaDosen"]); ?></td>
                         <td><?php echo($value["namaRuangan"]); ?></td>
                         <form action="" method="post">
-                            <td><button class="btn waves-effect waves-light" type="submit" value="<?php echo $value["idKelas"] ?>" name="viewKelas" >Lihat Absen</button></td>
+                            <td><button class="btn waves-effect waves-light" type="submit" value="<?php echo $value["idKelas"] ?>" name="viewKelas" >Absen</button></td>
                         </form>
                         </tr>
                         <?php }
