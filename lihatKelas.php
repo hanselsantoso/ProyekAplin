@@ -28,7 +28,7 @@
                         <th>ID ruangan</th>
                         <th>Hari</th>
                     </tr>
-                    <?php $kelas = executeQuery($mysqli, "SELECT k.id_kelas as 'idKelas',mk.nama_matakuliah as'namaMatakuliah',k.mulai_kelas as 'jadwalAwal',k.akhir_kelas as 'jadwalAkhir',d.nama as 'namaDosen',r.nama_ruangan as 'namaRuangan', DAYOFWEEK(k.hari) as 'Hari' FROM kelas k,mata_kuliah mk,dosen d,ruangan r WHERE k.id_matakuliah = mk.id_matakuliah and k.id_dosen = d.id_dosen and k.id_ruangan = r.id_ruangan"); 
+                    <?php $kelas = executeQuery($mysqli, "SELECT k.id_kelas as 'idKelas',mk.nama_matakuliah as'namaMatakuliah',k.mulai_kelas as 'jadwalAwal',k.akhir_kelas as 'jadwalAkhir',d.nama as 'namaDosen',r.nama_ruangan as 'namaRuangan', DAYOFWEEK(k.pertemuan_1) as 'Hari' FROM kelas k,mata_kuliah mk,dosen d,ruangan r WHERE k.id_matakuliah = mk.id_matakuliah and k.id_dosen = d.id_dosen and k.id_ruangan = r.id_ruangan"); 
                         foreach ($kelas as $key => $value) {?>
                         <tr>
                         <td><?php echo($value["idKelas"]); ?></td>
