@@ -26,7 +26,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div style="text-align: center"><h1><?php echo $_SESSION["namaKelas"] ?></h1></div>
+    <div style="text-align: center"><h1>Tambah Mahasiswa - <?php echo $_SESSION["namaKelas"] ?></h1></div>
     <div class="row">
         <div class="container">
             <div class="collection">

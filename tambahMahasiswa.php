@@ -20,7 +20,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div style="text-align: center"><h1>List Kelas</h1></div>
+    <div style="text-align: center"><h1>Tambah Mahasiswa - List Kelas</h1></div>
     <div class="row">
         <div class="container">
             <table>
@@ -37,9 +37,10 @@
                             <tr>
                             <td><?php echo $value["namaMk"] ?></td>
                             <form action="" method="post">
-                                <td><button class="btn waves-effect waves-light" type="submit" value="<?php echo $value["idKelas"] ?>" name="viewKelas" >Lihat Kelas</button></td>
+                                
                                 <input type="hidden" name="jurusan" value="<?php echo $value["jurusan"] ?>"> 
                                 <input type="hidden" name="namaKelas" value="<?php echo $value["namaMk"] ?>"> 
+                                <td><button class="btn waves-effect waves-light" type="submit" value="<?php echo $value["idKelas"] ?>" name="viewKelas" >Tambah Mahasiswa</button></td>
                             </form>
                             </tr>
                             <?php

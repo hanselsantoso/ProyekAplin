@@ -132,6 +132,15 @@
         $tanggal3 = date('Y-m-d', strtotime($dtgl[1]. '+ 14 days'));
         $tanggal4 = date('Y-m-d', strtotime($dtgl[1]. '+ 21 days'));
         $tanggal5 = date('Y-m-d', strtotime($dtgl[1]. '+ 28 days'));
+        $tanggal6 = date('Y-m-d', strtotime($dtgl[1]. '+ 35 days'));
+        $tanggal7 = date('Y-m-d', strtotime($dtgl[1]. '+ 42 days'));
+        $tanggal8 = date('Y-m-d', strtotime($dtgl[1]. '+ 49 days'));
+        $tanggal9 = date('Y-m-d', strtotime($dtgl[1]. '+ 56 days'));
+        $tanggal10 = date('Y-m-d', strtotime($dtgl[1]. '+ 63 days'));
+        $tanggal11 = date('Y-m-d', strtotime($dtgl[1]. '+ 70 days'));
+        $tanggal12 = date('Y-m-d', strtotime($dtgl[1]. '+ 77 days'));
+        $tanggal13 = date('Y-m-d', strtotime($dtgl[1]. '+ 84 days'));
+        $tanggal14 = date('Y-m-d', strtotime($dtgl[1]. '+ 91 days'));
         $hari = date('N',$prosestanggal);
 
         $hitungkelas = executeQuery($mysqli,"select max(substr(id_kelas,3,3)) from kelas");
@@ -156,7 +165,7 @@
         // var_dump($tanggal3);
         // var_dump($tanggal4);
         // var_dump($tanggal5);
-        executeNonQuery($mysqli, "insert into kelas values('$id', '$mk', '$dosen', '$ruang', '$jam', '$jamakhir', DATE_FORMAT('$tanggal', '%Y-%m-%d'), DATE_FORMAT('$tanggal2', '%Y-%m-%d'), DATE_FORMAT('$tanggal3', '%Y-%m-%d'), DATE_FORMAT('$tanggal4', '%Y-%m-%d'), DATE_FORMAT('$tanggal5', '%Y-%m-%d'))");
+        executeNonQuery($mysqli, "insert into kelas values('$id', '$mk', '$dosen', '$ruang', '$jam', '$jamakhir', DATE_FORMAT('$tanggal', '%Y-%m-%d'), DATE_FORMAT('$tanggal2', '%Y-%m-%d'), DATE_FORMAT('$tanggal3', '%Y-%m-%d'), DATE_FORMAT('$tanggal4', '%Y-%m-%d'), DATE_FORMAT('$tanggal5', '%Y-%m-%d'), DATE_FORMAT('$tanggal6', '%Y-%m-%d'), DATE_FORMAT('$tanggal7', '%Y-%m-%d'), DATE_FORMAT('$tanggal8', '%Y-%m-%d'), DATE_FORMAT('$tanggal9', '%Y-%m-%d'), DATE_FORMAT('$tanggal10', '%Y-%m-%d'), DATE_FORMAT('$tanggal11', '%Y-%m-%d'), DATE_FORMAT('$tanggal12', '%Y-%m-%d'), DATE_FORMAT('$tanggal13', '%Y-%m-%d'), DATE_FORMAT('$tanggal14', '%Y-%m-%d'))");
         // $message = "Berhasil mendaftarkan kelas!";
         // var_dump($mk);
         // var_dump($dtgl[1]);

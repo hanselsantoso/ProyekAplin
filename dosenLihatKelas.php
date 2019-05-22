@@ -20,7 +20,7 @@
     <title>Document</title>
 </head>
 <body>
-<div style="text-align: center"><h1>List Kelas</h1></div>
+<div style="text-align: center"><h1>Lihat Absen Kelas - List Kelas</h1></div>
     <div class="row">
         <div class="container">
             <table>

@@ -31,7 +31,7 @@
     <div class="row">
         <div>
         <div style="text-align: center">
-            <h1> List Kelas</h1>
+            <h1>Lihat Absen - List Kelas</h1>
             <div class="container">
             <table border="1">
                     <tr>
