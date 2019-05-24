@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 22, 2019 at 07:44 AM
+-- Generation Time: May 22, 2019 at 10:02 AM
 -- Server version: 10.1.36-MariaDB
--- PHP Version: 7.2.11
+-- PHP Version: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -50,26 +50,23 @@ INSERT INTO `absen_dosen` (`id_absendosen`, `id_dosen`, `id_kelas`, `waktu_absen
 -- --------------------------------------------------------
 
 --
--- Table structure for table `absen_siswa`
+-- Table structure for table `absen_mhs`
 --
 
-DROP TABLE IF EXISTS `absen_siswa`;
-CREATE TABLE `absen_siswa` (
-  `id_absensiswa` varchar(6) NOT NULL,
+DROP TABLE IF EXISTS `absen_mhs`;
+CREATE TABLE `absen_mhs` (
+  `id_absen` tinyint(4) NOT NULL,
+  `nrp_mhs` varchar(9) NOT NULL,
   `id_kelas` varchar(5) NOT NULL,
-  `nrp` varchar(9) NOT NULL,
-  `waktu_absensiswa` time NOT NULL,
-  `waktu_keluarsiswa` time NOT NULL
+  `tanggal_absen` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `absen_siswa`
+-- Dumping data for table `absen_mhs`
 --
 
-INSERT INTO `absen_siswa` (`id_absensiswa`, `id_kelas`, `nrp`, `waktu_absensiswa`, `waktu_keluarsiswa`) VALUES
-('AS0001', 'KE001', '219110001', '08:00:00', '10:30:00'),
-('AS0002', 'KE002', '219180001', '10:30:00', '13:00:00'),
-('AS0003', 'KE003', '219180002', '13:02:00', '15:35:00');
+INSERT INTO `absen_mhs` (`id_absen`, `nrp_mhs`, `id_kelas`, `tanggal_absen`) VALUES
+(1, '219180001', 'KE004', '2019-05-22');
 
 -- --------------------------------------------------------
 
@@ -276,12 +273,10 @@ ALTER TABLE `absen_dosen`
   ADD KEY `fk_kelasdosen` (`id_kelas`);
 
 --
--- Indexes for table `absen_siswa`
+-- Indexes for table `absen_mhs`
 --
-ALTER TABLE `absen_siswa`
-  ADD PRIMARY KEY (`id_absensiswa`),
-  ADD KEY `fk_absensiswa` (`id_kelas`),
-  ADD KEY `fk_nrpsiswa` (`nrp`);
+ALTER TABLE `absen_mhs`
+  ADD PRIMARY KEY (`id_absen`);
 
 --
 -- Indexes for table `dosen`
@@ -332,6 +327,16 @@ ALTER TABLE `ruangan`
   ADD PRIMARY KEY (`id_ruangan`);
 
 --
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `absen_mhs`
+--
+ALTER TABLE `absen_mhs`
+  MODIFY `id_absen` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -341,13 +346,6 @@ ALTER TABLE `ruangan`
 ALTER TABLE `absen_dosen`
   ADD CONSTRAINT `fk_absendosen` FOREIGN KEY (`id_dosen`) REFERENCES `dosen` (`id_dosen`),
   ADD CONSTRAINT `fk_kelasdosen` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id_kelas`);
-
---
--- Constraints for table `absen_siswa`
---
-ALTER TABLE `absen_siswa`
-  ADD CONSTRAINT `fk_absensiswa` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id_kelas`),
-  ADD CONSTRAINT `fk_nrpsiswa` FOREIGN KEY (`nrp`) REFERENCES `mahasiswa` (`nrp`);
 
 --
 -- Constraints for table `kelas`
