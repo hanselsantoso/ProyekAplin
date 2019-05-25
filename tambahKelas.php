@@ -37,15 +37,33 @@
             <form action="" method="post">
                 <div class="container">
                     <div class="input-field">
+                        <form action="" method="post">
+                        <select name="jurus" id="">
+                            <option value="" disabled selected>Pilih Jurusan</option>
+                            <?php
+                                $jurus = executeQuery($mysqli, "select * from jurusan");
+                                foreach($jurus as $key =>$value){
+                                    ?>
+                                    <option value="<?php echo $value["id_jurusan"] ?>"><?php echo $value["nama_jurusan"] ?></option>
+                                    <?php
+                                }
+                            ?>
+                        </select>
+                        <button type="submit">pilih jurusan</button>
+                        </form>
+                    </div>
+                    <div class="input-field">
                         <select name="matkul">
                             <option value="" disabled selected>Pilih Mata Kuliah</option>
                             <?php
-                            $jurusan = executeQuery($mysqli, "SELECT * FROM mata_kuliah"); 
+                            if (isset($_POST["jurus"])) {
+                                $jurusan = executeQuery($mysqli, "SELECT * FROM mata_kuliah WHERE id_jurusan='$_POST[jurus]'"); 
                                 foreach ($jurusan as $key => $value) {
                                     ?>
                                     <option value="<?php echo $value["id_matakuliah"] ?>"> <?php echo $value["nama_matakuliah"]  ?> </option>
                                     <?php
                                 }
+                            }
                             ?>
                         </select>
                         <label>Pilih Mata Kuliah</label>

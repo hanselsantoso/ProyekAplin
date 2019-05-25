@@ -15,6 +15,11 @@
         }
         
     }
+
+    if (isset($_POST['hapusMhs'])) {
+        executeNonQuery($mysqli, "delete from mengambil_kelas where nrp='$_POST[hapusMhs]' and id_kelas='$_SESSION[idKelas]'");
+        $message = "Berhasil Menghapus Siswa";
+    }
 ?>
 
 <!DOCTYPE html>
@@ -52,14 +57,29 @@
                 <?php 
                     $jurusan = $_SESSION["jurusan"];
                     $mhs = executeQuery($mysqli, "SELECT * FROM mahasiswa WHERE id_jurusan = '$jurusan' "); 
-                        foreach ($mhs as $key => $value) {?>
+                        foreach ($mhs as $key => $value) {
+                            $tes = executeQuery($mysqli, "SELECT * FROM mengambil_kelas where nrp='$value[nrp]' and id_kelas='$_SESSION[idKelas]'");
+
+                            if (!empty($tes)) {
+                                ?>
+                                <form action="" method="post">
+                                    <tr>
+                                        <td><?php echo($value["nama"]); ?></td>
+                                        <td><button class="btn waves-effect waves-light" type="submit" value="<?php echo $value["nrp"]; ?>" name="hapusMhs" >Hapus</button></td>
+                                    </tr>
+                                </form>
+                                <?php
+                            }
+                            
+                            else{ ?>
                         <form action="" method="post">
                             <tr>
                                 <td><?php echo($value["nama"]); ?></td>
                                 <td><button class="btn waves-effect waves-light" type="submit" value="<?php echo $value["nrp"]; ?>" name="tambahMhs" >Tambah</button></td>
                             </tr>
                         </form>
-                        <?php }
+                        <?php    }
+                         }
                 ?>
             </table>
         </div>
