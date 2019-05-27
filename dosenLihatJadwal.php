@@ -56,6 +56,9 @@
                         <?php }
                     ?>
                 </table>
+                <form action="dosenHome.php">
+                    <input type="submit" value="Back">
+                </form>
         </div>
     </div>
 </body>

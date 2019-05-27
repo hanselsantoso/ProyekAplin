@@ -65,6 +65,9 @@
                         <?php }
                     ?>
                 </table>
+                <form action="mhshome.php">
+                    <input type="submit" value="Back">
+                </form>
             </div>
         </div>
         </div>
